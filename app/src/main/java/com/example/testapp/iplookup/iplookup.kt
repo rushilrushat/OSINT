@@ -1,20 +1,34 @@
 package com.example.testapp.iplookup
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.pdf.PdfDocument
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import com.example.testapp.R
 import com.example.testapp.iplookup.data.ipdata
 import kotlinx.android.synthetic.main.activity_iplookup.*
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.button
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -29,11 +43,14 @@ class iplookup : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_iplookup)
+        setContentView(R.layout.activity_main)
 
 
-
+        button2.setOnClickListener() {
+            createPdf("hii hello")
+        }
         button.setOnClickListener {
+
             var ip = editText.text
             var listView: ListView? = null
             var arrayAdapter: ArrayAdapter<String>? = null
@@ -85,6 +102,8 @@ class iplookup : AppCompatActivity() {
                         )
                         listView?.adapter = arrayAdapter
 
+                        button2.isVisible = true
+
                     }
 
                 })
@@ -97,5 +116,69 @@ class iplookup : AppCompatActivity() {
 
     }
 
+    private fun createPdf(sometext: String) { // create a new document
+        val document = PdfDocument()
+        // crate a page description
+        var pageInfo = PdfDocument.PageInfo.Builder(300, 600, 1).create()
+        // start a page
+        var page = document.startPage(pageInfo)
+        var canvas: Canvas = page.canvas
+        var paint = Paint()
+        paint.setColor(Color.RED)
+        canvas.drawCircle(50F, 50F, 30F, paint)
+        paint.setColor(Color.BLACK)
+        canvas.drawText(sometext, 80F, 50F, paint)
+        //canvas.drawt
+// finish the page
+        document.finishPage(page)
+        // draw text on the graphics object of the page
+// Create Page 2
+        pageInfo = PdfDocument.PageInfo.Builder(300, 600, 2).create()
+        page = document.startPage(pageInfo)
+        canvas = page.canvas
+        paint = Paint()
+        paint.setColor(Color.BLUE)
+        canvas.drawCircle(100F, 100F, 100F, paint)
+        document.finishPage(page)
+        // write the document content
+        val directory_path: String =
+            Environment.getExternalStorageDirectory().getPath().toString() + "/mypdf/"
+        val file = File(directory_path)
+        if (!file.exists()) {
+            file.mkdirs()
+        }
+        val targetPdf = directory_path + "test-2.pdf"
+        val filePath = File(targetPdf)
+        try {
+            document.writeTo(FileOutputStream(filePath))
+            Toast.makeText(this, "Done", Toast.LENGTH_LONG).show()
+        } catch (e: IOException) {
+            Log.e("main", "error " + e.toString())
+            Toast.makeText(this, "Something wrong: " + e.toString(), Toast.LENGTH_LONG).show()
+        }
+        // close the document
+        document.close()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun setupPermissions() {
+        val readexternalpermission = ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        )
+        val writeexternalpermission = ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+        )
+
+        if (readexternalpermission != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(arrayOf<String>(Manifest.permission.READ_EXTERNAL_STORAGE),123)
+            Toast.makeText(applicationContext, "read Permission Denia", Toast.LENGTH_SHORT).show()
+        }
+        if (writeexternalpermission != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(arrayOf<String>(Manifest.permission.WRITE_EXTERNAL_STORAGE),123)
+            Toast.makeText(applicationContext, "write Permission Denia", Toast.LENGTH_SHORT).show()
+        }
+    }
 
 }
