@@ -1,4 +1,4 @@
-package com.example.testapp.data
+package com.example.testapp.iplookup.data
 
 data class ipdata(
     val `data`: Data,

@@ -1,10 +1,8 @@
-package com.example.testapp
+package com.example.testapp.iplookup
 
-import android.text.Editable
-import com.example.testapp.data.ipdata
+import com.example.testapp.iplookup.data.ipdata
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 

@@ -1,4 +1,4 @@
-package com.example.testapp.data
+package com.example.testapp.iplookup.data
 
 data class Geo(
     val asn: Int,
