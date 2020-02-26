@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         iplookup.setOnClickListener() {
-            intent = Intent(applicationContext, iplookup::class.java)
+            intent = Intent(this, com.example.testapp.iplookup.iplookup::class.java)
             startActivity(intent)
         }
 
