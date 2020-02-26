@@ -49,7 +49,7 @@ class iplookup : AppCompatActivity() {
     private val STORAGE_CODE: Int = 100
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_iplookup)
 
 
         button2.setOnClickListener() {

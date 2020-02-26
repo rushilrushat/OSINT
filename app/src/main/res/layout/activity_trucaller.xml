@@ -1,70 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".trucaller.trucaller">
-
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="73dp"
-        android:layout_height="74dp"
-        app:srcCompat="@drawable/ic_trucaller"
-        tools:layout_editor_absoluteX="6dp"
-        tools:layout_editor_absoluteY="5dp"
-        tools:ignore="VectorDrawableCompat" />
+    android:orientation="vertical"
+    tools:context=".iplookup.iplookup">
 
     <LinearLayout
+        android:id="@+id/ipmain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Truecaller"
-            android:textAllCaps="false"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:fontFamily="sans-serif-black" />
-
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="phone" />
-
-
-        <Button
-            android:id="@+id/button"
+        <ImageView
+            android:id="@+id/imageView"
             android:layout_width="wrap_content"
-            android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Submit" />
+            android:layout_gravity="left"
+            android:src="@drawable/ic_trucaller"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Contact Number"
+                android:textColor="@color/colorPrimary" />
+
+            <Button
+
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                android:text="Submit"
+                android:textColor="@android:color/background_light" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Generate Report"
+                android:visibility="gone"/>
+        </LinearLayout>
 
 
     </LinearLayout>
 
 
-    <TextView
-        android:id="@+id/textView5"
-        android:text="hii"
+    <ListView
+        android:layout_below="@+id/ipmain"
+        android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        />
+        android:layout_marginTop="20dp"
+        android:textColor="#000000"/>
 
 
-</LinearLayout>
-
+</RelativeLayout>

@@ -30,6 +30,10 @@ class MainActivity : AppCompatActivity() {
             intent = Intent(this, com.example.testapp.iplookup.iplookup::class.java)
             startActivity(intent)
         }
+        trucaller.setOnClickListener(){
+            intent = Intent(this, com.example.testapp.trucaller.trucaller::class.java)
+            startActivity(intent)
+        }
 
     }
 }

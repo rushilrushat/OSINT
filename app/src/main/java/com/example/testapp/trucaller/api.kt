@@ -1,10 +1,12 @@
-package com.example.testapp.trucaller
+package com.osint.myapplication
+
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface api {
 
-    @GET("WebServiceJsonForApps.aspx")
-    fun getData(@Query("type") type: String?,@Query("Mobile")Mobile:String?): Call<phonedata>
+    @GET("api/v1/lookup/people/sprout/{id}")
+    fun getData(@Path("id")id:String?): Call<phonedata>
 }
