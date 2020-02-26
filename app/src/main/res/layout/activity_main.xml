@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
-
     <TableRow
         android:id="@+id/tableRow1"
         android:layout_width="match_parent"
@@ -14,34 +13,19 @@
 
         <ImageButton
             android:id="@+id/iplookup"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginLeft="20dp"
-            android:layout_column="1"
-            android:text="IP Location"
-            app:srcCompat="@drawable/abc" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/abc"
+            android:layout_column="1"/>
 
         <ImageButton
             android:id="@+id/trucaller"
-            android:layout_width="150dp"
-            android:layout_marginLeft="20dp"
-            android:layout_height="150dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_column="2"
-            android:text="Caller Detail"
-            app:srcCompat="@drawable/ic_trucaller"
+            android:cropToPadding="true"
+            app:srcCompat="@drawable/ic_truecaller"
             tools:ignore="VectorDrawableCompat" />
-
-        <ImageButton
-            android:id="@+id/imageView"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginLeft="20dp"
-            android:layout_column="3"
-            android:text="Dns Loolup"
-            app:srcCompat="@drawable/dns"
-            tools:ignore="VectorDrawableCompat" />
-
-
     </TableRow>
 
 
