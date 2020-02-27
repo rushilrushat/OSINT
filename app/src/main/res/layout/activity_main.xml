@@ -55,7 +55,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:gravity="center"
-                        android:text="Tower Information"
+                        android:text="IP Locator"
                         android:textColor="@color/cardview_dark_background" />
                 </LinearLayout>
 
@@ -78,7 +78,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
                         android:scaleType="fitXY"
-                        android:src="@drawable/ic_trucaller"
+                        android:src="@drawable/ic_truecaller"
                         android:visibility="visible" />
 
                     <TextView
@@ -87,7 +87,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:gravity="center"
-                        android:text="Port Inquiry"
+                        android:text="Caller Informatioin"
                         android:textColor="@color/cardview_dark_background"
                         android:visibility="visible" />
                 </LinearLayout>
@@ -116,7 +116,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:gravity="center"
-                        android:text="MSC-Code"
+                        android:text="DNS Lookup"
                         android:textColor="@color/cardview_dark_background" />
                 </LinearLayout>
             </LinearLayout>

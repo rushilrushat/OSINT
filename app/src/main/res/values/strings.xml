@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Test App</string>
+    <string name="app_name">Socretes</string>
     <string-array name="Colors">
         <item name="color">HOST</item>
         <item name="color">IP</item>

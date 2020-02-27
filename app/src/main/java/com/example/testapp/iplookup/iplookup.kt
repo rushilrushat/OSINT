@@ -135,7 +135,7 @@ class iplookup : AppCompatActivity() {
 
     }
 
-    private fun createPdf(sometext: String) { // create a new document
+    /*private fun createPdf(sometext: String) { // create a new document
         val document = PdfDocument()
         // crate a page description
         var pageInfo = PdfDocument.PageInfo.Builder(300, 600, 1).create()
@@ -178,7 +178,7 @@ class iplookup : AppCompatActivity() {
         // close the document
         document.close()
     }
-
+*/
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
