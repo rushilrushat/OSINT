@@ -15,13 +15,18 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.testapp.R
+import com.example.testapp.adupter
 import com.example.testapp.iplookup.data.ipdata
+import com.example.testapp.iplookup.iplookup
 import com.itextpdf.text.Document
 import com.itextpdf.text.Paragraph
 import com.itextpdf.text.pdf.PdfWriter
 
 import kotlinx.android.synthetic.main.activity_iplookup.*
+import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,16 +39,37 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Matcher
 import java.util.regex.Pattern
+import kotlin.collections.ArrayList
 
 class iplookup : AppCompatActivity() {
-
+    private lateinit var layoutManager: RecyclerView.LayoutManager
     private val IP_ADDRESS: Pattern = Pattern.compile(
         "((25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9])\\.(25[0-5]|2[0-4]"
                 + "[0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1]"
                 + "[0-9]{2}|[1-9][0-9]|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}"
                 + "|[1-9][0-9]|[0-9]))"
     )
-    var users = arrayOf<String>()
+    var key = arrayOf<String>(
+        "HOST",
+        "IP",
+        "RDNS",
+        "ASN",
+        "ISP",
+        "COUNTRY CODE",
+        "REGION NAME",
+        "REGION CODE",
+        "CITY",
+        "POSTAL CODE",
+        "CONTINENTNAME",
+        "CONTINENT CODE",
+        "LATITUDE",
+        "LONGITUDE",
+        "METRO CODE",
+        "TIMEZONE",
+        "DATETIME"
+    )
+    var value: ArrayList<String> = ArrayList()
+
     private val STORAGE_CODE: Int = 100
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,11 +87,11 @@ class iplookup : AppCompatActivity() {
                     requestPermissions(permissions, STORAGE_CODE)
                 } else {
                     //permission already granted, call savePdf() method
-                    createPdf(users)
+                    createPdf(value)
                 }
             } else {
                 //system OS < marshmallow, call savePdf() method
-                createPdf(users)
+                createPdf(value)
             }
         }
         button.setOnClickListener {
@@ -91,35 +117,36 @@ class iplookup : AppCompatActivity() {
                     override fun onResponse(call: Call<ipdata>, response: Response<ipdata>) {
                         Log.d("DATA", response.body().toString())
 
-                        users = arrayOf(
-                            "HOST= " + response.body()?.data?.geo?.host,
-                            "IP= " + response.body()?.data?.geo?.ip,
-                            "RDNS= " + response.body()?.data?.geo?.rdns,
-                            "ASN= " + response.body()?.data?.geo?.asn,
-                            "ISP= " + response.body()?.data?.geo?.isp,
-                            "COUNTRY NAME= " + response.body()?.data?.geo?.country_name,
-                            "COUNTRY CODE= " + response.body()?.data?.geo?.continent_code,
-                            "REGION NAME= " + response.body()?.data?.geo?.region_name,
-                            "REGION CODE= " + response.body()?.data?.geo?.region_code,
-                            "CITY= " + response.body()?.data?.geo?.city,
-                            "POSTAL CODE= " + response.body()?.data?.geo?.postal_code,
-                            "CONTINENTNAME= " + response.body()?.data?.geo?.continent_name,
-                            "CONTINENT CODE= " + response.body()?.data?.geo?.continent_code,
-                            "LATITUDE= " + response.body()?.data?.geo?.latitude,
-                            "LONGITUDE= " + response.body()?.data?.geo?.longitude,
-                            "METRO CODE= " + response.body()?.data?.geo?.metro_code,
-                            "TIMEZONE= " + response.body()?.data?.geo?.timezone,
-                            "DATETIME= " + response.body()?.data?.geo?.datetime
-                        )
+                        value.add(response.body()?.data?.geo?.host.toString())
+                        value.add(response.body()?.data?.geo?.ip.toString())
+                        value.add(response.body()?.data?.geo?.rdns.toString())
+                        value.add(response.body()?.data?.geo?.asn.toString())
+                        value.add(response.body()?.data?.geo?.isp.toString())
+                        value.add(response.body()?.data?.geo?.continent_code.toString())
+                        value.add(response.body()?.data?.geo?.region_name.toString())
+                        value.add(response.body()?.data?.geo?.region_code.toString())
+                        value.add(response.body()?.data?.geo?.city.toString())
+                        value.add(response.body()?.data?.geo?.postal_code.toString())
+                        value.add(response.body()?.data?.geo?.continent_name.toString())
+                        value.add(response.body()?.data?.geo?.continent_code.toString())
+                        value.add(response.body()?.data?.geo?.latitude.toString())
+                        value.add(response.body()?.data?.geo?.longitude.toString())
+                        value.add(response.body()?.data?.geo?.metro_code.toString())
+                        value.add(response.body()?.data?.geo?.timezone.toString())
+                        value.add(response.body()?.data?.geo?.datetime.toString())
 
 
-                        listView = findViewById(R.id.listview)
-                        arrayAdapter = ArrayAdapter(
-                            applicationContext,
-                            android.R.layout.simple_list_item_1,
-                            users
-                        )
-                        listView?.adapter = arrayAdapter
+                        layoutManager = LinearLayoutManager(applicationContext)
+                        custom_view.layoutManager = layoutManager
+                        custom_view.adapter = adupter(key,value, applicationContext)
+
+                        /*  listView = findViewById(R.id.listview)
+                          arrayAdapter = ArrayAdapter(
+                              applicationContext,
+                              android.R.layout.simple_list_item_1,
+                              value
+                          )
+                          listView?.adapter = arrayAdapter*/
 
                         button2.isVisible = true
 
@@ -135,50 +162,50 @@ class iplookup : AppCompatActivity() {
 
     }
 
-    private fun createPdf(sometext: String) { // create a new document
-        val document = PdfDocument()
-        // crate a page description
-        var pageInfo = PdfDocument.PageInfo.Builder(300, 600, 1).create()
-        // start a page
-        var page = document.startPage(pageInfo)
-        var canvas: Canvas = page.canvas
-        var paint = Paint()
-        paint.setColor(Color.RED)
-        canvas.drawCircle(50F, 50F, 30F, paint)
-        paint.setColor(Color.BLACK)
-        canvas.drawText(sometext, 80F, 50F, paint)
-        //canvas.drawt
-// finish the page
-        document.finishPage(page)
-        // draw text on the graphics object of the page
-// Create Page 2
-        pageInfo = PdfDocument.PageInfo.Builder(300, 600, 2).create()
-        page = document.startPage(pageInfo)
-        canvas = page.canvas
-        paint = Paint()
-        paint.setColor(Color.BLUE)
-        canvas.drawCircle(100F, 100F, 100F, paint)
-        document.finishPage(page)
-        // write the document content
-        val directory_path: String =
-            Environment.getExternalStorageDirectory().getPath().toString() + "/mypdf/"
-        val file = File(directory_path)
-        if (!file.exists()) {
-            file.mkdirs()
-        }
-        val targetPdf = directory_path + "test-2.pdf"
-        val filePath = File(targetPdf)
-        try {
-            document.writeTo(FileOutputStream(filePath))
-            Toast.makeText(this, "Done", Toast.LENGTH_LONG).show()
-        } catch (e: IOException) {
-            Log.e("main", "error " + e.toString())
-            Toast.makeText(this, "Something wrong: " + e.toString(), Toast.LENGTH_LONG).show()
-        }
-        // close the document
-        document.close()
-    }
-
+    /*  private fun createPdf(sometext: String) { // create a new document
+          val document = PdfDocument()
+          // crate a page description
+          var pageInfo = PdfDocument.PageInfo.Builder(300, 600, 1).create()
+          // start a page
+          var page = document.startPage(pageInfo)
+          var canvas: Canvas = page.canvas
+          var paint = Paint()
+          paint.setColor(Color.RED)
+          canvas.drawCircle(50F, 50F, 30F, paint)
+          paint.setColor(Color.BLACK)
+          canvas.drawText(sometext, 80F, 50F, paint)
+          //canvas.drawt
+  // finish the page
+          document.finishPage(page)
+          // draw text on the graphics object of the page
+  // Create Page 2
+          pageInfo = PdfDocument.PageInfo.Builder(300, 600, 2).create()
+          page = document.startPage(pageInfo)
+          canvas = page.canvas
+          paint = Paint()
+          paint.setColor(Color.BLUE)
+          canvas.drawCircle(100F, 100F, 100F, paint)
+          document.finishPage(page)
+          // write the document content
+          val directory_path: String =
+              Environment.getExternalStorageDirectory().getPath().toString() + "/mypdf/"
+          val file = File(directory_path)
+          if (!file.exists()) {
+              file.mkdirs()
+          }
+          val targetPdf = directory_path + "test-2.pdf"
+          val filePath = File(targetPdf)
+          try {
+              document.writeTo(FileOutputStream(filePath))
+              Toast.makeText(this, "Done", Toast.LENGTH_LONG).show()
+          } catch (e: IOException) {
+              Log.e("main", "error " + e.toString())
+              Toast.makeText(this, "Something wrong: " + e.toString(), Toast.LENGTH_LONG).show()
+          }
+          // close the document
+          document.close()
+      }
+  */
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -197,7 +224,8 @@ class iplookup : AppCompatActivity() {
             }
         }
     }
-    private fun createPdf(sometext: Array<String>) { // create a new document
+
+    private fun createPdf(sometext: ArrayList<String>) { // create a new document
         val mDoc = Document()
         //pdf file name
         val mFileName = SimpleDateFormat(
