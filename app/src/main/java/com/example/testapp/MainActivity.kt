@@ -26,11 +26,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        iplookup.setOnClickListener() {
+        ip_button.setOnClickListener() {
             intent = Intent(this, com.example.testapp.iplookup.iplookup::class.java)
             startActivity(intent)
         }
-        trucaller.setOnClickListener(){
+        true_button.setOnClickListener(){
             intent = Intent(this, com.example.testapp.trucaller.trucaller::class.java)
             startActivity(intent)
         }
