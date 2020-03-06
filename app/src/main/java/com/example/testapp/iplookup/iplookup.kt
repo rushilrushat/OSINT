@@ -1,32 +1,30 @@
 package com.example.testapp.iplookup
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.pdf.PdfDocument
+import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testapp.R
 import com.example.testapp.adupter
 import com.example.testapp.iplookup.data.ipdata
-import com.example.testapp.iplookup.iplookup
 import com.itextpdf.text.Document
-import com.itextpdf.text.Paragraph
+import com.itextpdf.text.Font
+import com.itextpdf.text.Phrase
+import com.itextpdf.text.pdf.PdfPCell
+import com.itextpdf.text.pdf.PdfPTable
 import com.itextpdf.text.pdf.PdfWriter
-
 import kotlinx.android.synthetic.main.activity_iplookup.*
-import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -87,11 +85,11 @@ class iplookup : AppCompatActivity() {
                     requestPermissions(permissions, STORAGE_CODE)
                 } else {
                     //permission already granted, call savePdf() method
-                    createPdf(value)
+                    createPdf(key, value)
                 }
             } else {
                 //system OS < marshmallow, call savePdf() method
-                createPdf(value)
+                createPdf(key, value)
             }
         }
         button.setOnClickListener {
@@ -138,15 +136,9 @@ class iplookup : AppCompatActivity() {
 
                         layoutManager = LinearLayoutManager(applicationContext)
                         custom_view.layoutManager = layoutManager
-                        custom_view.adapter = adupter(key,value, applicationContext)
+                        custom_view.adapter = adupter(key, value, applicationContext)
 
-                        /*  listView = findViewById(R.id.listview)
-                          arrayAdapter = ArrayAdapter(
-                              applicationContext,
-                              android.R.layout.simple_list_item_1,
-                              value
-                          )
-                          listView?.adapter = arrayAdapter*/
+
 
                         button2.isVisible = true
 
@@ -162,50 +154,7 @@ class iplookup : AppCompatActivity() {
 
     }
 
-    /*  private fun createPdf(sometext: String) { // create a new document
-          val document = PdfDocument()
-          // crate a page description
-          var pageInfo = PdfDocument.PageInfo.Builder(300, 600, 1).create()
-          // start a page
-          var page = document.startPage(pageInfo)
-          var canvas: Canvas = page.canvas
-          var paint = Paint()
-          paint.setColor(Color.RED)
-          canvas.drawCircle(50F, 50F, 30F, paint)
-          paint.setColor(Color.BLACK)
-          canvas.drawText(sometext, 80F, 50F, paint)
-          //canvas.drawt
-  // finish the page
-          document.finishPage(page)
-          // draw text on the graphics object of the page
-  // Create Page 2
-          pageInfo = PdfDocument.PageInfo.Builder(300, 600, 2).create()
-          page = document.startPage(pageInfo)
-          canvas = page.canvas
-          paint = Paint()
-          paint.setColor(Color.BLUE)
-          canvas.drawCircle(100F, 100F, 100F, paint)
-          document.finishPage(page)
-          // write the document content
-          val directory_path: String =
-              Environment.getExternalStorageDirectory().getPath().toString() + "/mypdf/"
-          val file = File(directory_path)
-          if (!file.exists()) {
-              file.mkdirs()
-          }
-          val targetPdf = directory_path + "test-2.pdf"
-          val filePath = File(targetPdf)
-          try {
-              document.writeTo(FileOutputStream(filePath))
-              Toast.makeText(this, "Done", Toast.LENGTH_LONG).show()
-          } catch (e: IOException) {
-              Log.e("main", "error " + e.toString())
-              Toast.makeText(this, "Something wrong: " + e.toString(), Toast.LENGTH_LONG).show()
-          }
-          // close the document
-          document.close()
-      }
-  */
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -225,7 +174,8 @@ class iplookup : AppCompatActivity() {
         }
     }
 
-    private fun createPdf(sometext: ArrayList<String>) { // create a new document
+    private fun createPdf(key: Array<String>, value: ArrayList<String>) {
+        // create a new document
         val mDoc = Document()
         //pdf file name
         val mFileName = SimpleDateFormat(
@@ -243,21 +193,46 @@ class iplookup : AppCompatActivity() {
             mDoc.open()
 
             //get text from EditText i.e. textEt
-
+            var catFont = Font()
             //add author of the document (metadata)
-            mDoc.addAuthor("Atif Pervaiz")
+            mDoc.addAuthor("Anonymous")
+            mDoc.addTitle("IP Information")
+            var pdftable = PdfPTable(2)
 
+            var cell = PdfPCell(Phrase("Data Fatch From keycdn.com"))
+            cell.setColspan(2)
+            pdftable.addCell(cell)
             //add paragraph to the document
             //mDoc.add(Paragraph(sometext))
-            for (i in sometext) {
-                mDoc.add(Paragraph(i))
+            for (j in key) {
+                var phrase = Phrase(j);
+                pdftable.addCell(PdfPCell(phrase));
+
+
             }
+            for (i in value) {
+                var phrase = Phrase(i);
+                pdftable.addCell(PdfPCell(phrase));
+                //mDoc.add(Paragraph(i))
+
+            }
+            pdftable.completeRow()
+            mDoc.add(pdftable)
             //close document
             mDoc.close()
 
             //show file saved message with file name and path
             Toast.makeText(this, "$mFileName.pdf\nis saved to\n$mFilePath", Toast.LENGTH_SHORT)
                 .show()
+
+
+            Log.d("path ",mFilePath.toString())
+            intent = Intent(Intent.ACTION_VIEW)
+            intent.setDataAndType(Uri.fromFile(File(mFilePath)), "application/pdf")
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            startActivity(intent)
+
         } catch (e: Exception) {
             //if anything goes wrong causing exception, get and show exception message
             Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()

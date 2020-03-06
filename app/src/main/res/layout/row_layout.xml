@@ -1,29 +1,30 @@
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:stretchColumns="*">
+    android:layout_height="wrap_content">
 
-    <TableRow
-        android:id="@+id/tableRow1"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+
 
         <TextView
             android:id="@+id/key"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:gravity="left"
-            android:textSize="20sp" />
+            android:layout_weight="0.5"
+            android:padding="5dp"
+            android:textColor="@color/colorPrimary" />
 
         <TextView
             android:id="@+id/value"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="right"
-            android:layout_column="1"
-            android:textSize="20sp" />
-
-
-    </TableRow>
-</TableLayout>
+            android:layout_weight="0.5"
+            android:padding="5dp"
+            android:textColor="@color/colorPrimary" />
+    </LinearLayout>
+</LinearLayout>

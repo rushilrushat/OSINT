@@ -1,25 +1,3 @@
 <resources>
     <string name="app_name">Socretes</string>
-    <string-array name="Colors">
-        <item name="color">HOST</item>
-        <item name="color">IP</item>
-        <item name="color">RDNS</item>
-        <item name="color">ANS</item>
-        <item name="color">ISP</item>
-        <item name="color">country_name</item>
-        <item name="color">country_code</item>
-        <item name="color">region_name</item>
-        <item name="color">region_code</item>
-        <item name="color">city</item>
-        <item name="color">postal_code</item>
-        <item name="color">continent_name</item>
-        <item name="color">continent_code</item>
-        <item name="color">latitude</item>
-        <item name="color">longitude</item>
-        <item name="color">metro_code</item>
-        <item name="color">timezone</item>
-        <item name="color">datetime</item>
-
-
-    </string-array>
 </resources>
