@@ -23,10 +23,12 @@ class adupter(val  key:Array<String>,val value: ArrayList<String>, val context: 
 
         holder.tvkey?.text=key.get(position)
         holder.tvvalue?.text=value.get(position)
+
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         // Holds the TextView that will add each animal to
+
         val tvkey = view.key
         val tvvalue = view.value
     }
