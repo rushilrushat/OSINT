@@ -48,26 +48,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Generate Report"
-                android:visibility="gone"/>
+                android:visibility="gone" />
         </LinearLayout>
-
-
     </LinearLayout>
-
-
-   <!-- <ListView
-        android:layout_below="@+id/ipmain"
-        android:id="@+id/listview"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        android:textColor="#000000"/>-->
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ipmain">
+
+        <ListView
+
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textColor="#000000"
+            android:divider="@android:color/holo_green_light"
+            android:dividerHeight="5dp"
+            android:clickable="true"
+            android:choiceMode="singleChoice"/>
+    </androidx.cardview.widget.CardView>
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/custom_view"
+        android:id="@+id/iplookup_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ipmain"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp" />
 
 
 </RelativeLayout>
