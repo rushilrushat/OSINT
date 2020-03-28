@@ -111,7 +111,7 @@ lateinit var adpt:adupter
                         value.add(response.body()?.data?.geo?.metro_code.toString())
                         value.add(response.body()?.data?.geo?.timezone.toString())
                         value.add(response.body()?.data?.geo?.datetime.toString())
-                        button2.visibility = View.VISIBLE
+
                         adpt.notifyDataSetChanged()
 
 
