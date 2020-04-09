@@ -7,6 +7,8 @@ import android.net.Uri
 import android.os.Environment
 import android.util.Log
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import com.example.testapp.iplookup.iplookup
 import com.itextpdf.text.*
 import com.itextpdf.text.BaseColor
 import com.itextpdf.text.pdf.BaseFont
@@ -19,6 +21,8 @@ import java.io.FileOutputStream
 import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.*
+import androidx.core.content.ContextCompat.startActivity
+import androidx.core.content.FileProvider
 
 
 class createPDF(context: Context) {
@@ -28,7 +32,7 @@ class createPDF(context: Context) {
 
     }
 
-    fun createPdf( key: Array<String>, value: ArrayList<String>) {
+    fun createPdf(name:String, key: ArrayList<String>, value: ArrayList<String>) {
 
 
 
@@ -56,7 +60,7 @@ class createPDF(context: Context) {
             //add author of the document (metadata)
             mDoc.addAuthor("Anonymous")
             var titleStyle = Font(fontName, 36.0f, Font.NORMAL, BaseColor.BLACK)
-            addNewItem(mDoc, "IP Information",Element.ALIGN_TOP, titleStyle)
+            addNewItem(mDoc, name,Element.ALIGN_TOP, titleStyle)
 
             val lineSeparator = LineSeparator()
             lineSeparator.setLineColor(BaseColor(0, 0, 0, 68))
@@ -64,24 +68,31 @@ class createPDF(context: Context) {
 
             mDoc.add(Chunk(lineSeparator))
             var pdftable = PdfPTable(2)
-
-            var cell = PdfPCell(Phrase("Data Fatch From keycdn.com"))
+            var cell:PdfPCell
+           /* var cell = PdfPCell(Phrase("Data Fatch From keycdn.com"))
+            cell.border=0
             cell.setColspan(2)
-            pdftable.addCell(cell)
+            cell.paddingBottom=10.0f
+            pdftable.addCell(cell)*/
 
-            for (j in key) {
-                var phrase = Phrase(j);
-                pdftable.addCell(PdfPCell(phrase));
+            for (i in value.indices) {
+                if (i.equals("")){
+                    Log.d("data arr","null")
+                }
+                var phrase =PdfPCell(Phrase(key.get(i)))
+                cell=phrase
+                cell.border=0
+                pdftable.addCell(cell);
+                phrase =PdfPCell(Phrase(value.get(i)))
+                cell=phrase
+                cell.border=0
+                pdftable.addCell(cell);
 
-
-            }
-            for (i in value) {
-                var phrase = Phrase(i);
-                pdftable.addCell(PdfPCell(phrase));
                 //mDoc.add(Paragraph(i))
 
             }
             pdftable.completeRow()
+
 
             mDoc.add(pdftable)
             //close document
@@ -112,12 +123,17 @@ class createPDF(context: Context) {
 
     }
     private fun previewPdf() {
-
         var intent=Intent(context1,pdfView::class.java)
         intent.putExtra("FileUrl", Uri.fromFile( pdfFile).toString())
         intent.setFlags(FLAG_ACTIVITY_NEW_TASK)
         context1.startActivity(intent)
 
+       /* var pdf1: Uri = FileProvider.getUriForFile(context1,BuildConfig.APPLICATION_ID+".provider",pdfFile!!)
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.setDataAndType(pdf1, "application/pdf")
+        intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+        intent.setFlags(FLAG_ACTIVITY_NEW_TASK)
+        context1.startActivity(intent)*/
 
     }
 

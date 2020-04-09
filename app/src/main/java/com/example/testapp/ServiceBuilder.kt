@@ -5,9 +5,9 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ServiceBuilder(URL: String) {
+object ServiceBuilder {
     // Before release, change this URL to your live server URL such as "https://smartherd.com/"
-    private  val URL = "http://10.0.2.2:9000/"
+    private  val URL = "https://rushilworld.000webhostapp.com/"
 
     // Create Logger
     private val logger = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)

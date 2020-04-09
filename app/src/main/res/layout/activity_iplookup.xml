@@ -57,16 +57,10 @@
         android:layout_below="@+id/ipmain">
 
         <ListView
+            android:id="@+id/checkable_list"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
 
-            android:id="@+id/listview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:textColor="#000000"
-            android:divider="@android:color/holo_green_light"
-            android:dividerHeight="5dp"
-            android:clickable="true"
-            android:choiceMode="singleChoice"/>
     </androidx.cardview.widget.CardView>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/iplookup_recyclerview"

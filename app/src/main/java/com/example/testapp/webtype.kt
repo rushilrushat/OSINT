@@ -1,10 +1,18 @@
 package com.example.testapp
 
-class webtype : ArrayList<webtypeItem>()
-
-data class webtypeItem(
-    val id: String,
-    val name: String,
-    val type: String,
-    val url: String
+/*data class webtype(
+    val `data`: Data
 )
+
+data class Data(
+         var id: String,
+         var name: String,
+         var type: String,
+         var url: String
+)*/
+class Data{
+ var id: Int = 0
+  var name: String=""
+  var type: String =""
+  var url: String = ""
+}
