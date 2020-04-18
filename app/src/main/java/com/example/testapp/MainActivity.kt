@@ -41,6 +41,10 @@ class MainActivity : AppCompatActivity() {
             intent = Intent(this, com.example.testapp.trucaller.trucaller::class.java)
             startActivity(intent)
         }
+        dns_button.setOnClickListener {
+            intent = Intent(this, com.example.testapp.trucaller.trucaller::class.java)
+            startActivity(intent)
+        }
         tower_info.setOnClickListener {
             intent = Intent(this, com.example.testapp.Towerinfo::class.java)
             startActivity(intent)
