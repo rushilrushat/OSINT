@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.row_layout.view.*
 
-class adupter(val  key:Array<String>,val value: ArrayList<String>, val context: Context) :
-    RecyclerView.Adapter<adupter.ViewHolder>() {
+class adupter(val  key:ArrayList<String>,val value: ArrayList<String>, val context: Context) :
+        RecyclerView.Adapter<adupter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -33,5 +33,3 @@ class adupter(val  key:Array<String>,val value: ArrayList<String>, val context: 
         val tvvalue = view.value
     }
 }
-
-

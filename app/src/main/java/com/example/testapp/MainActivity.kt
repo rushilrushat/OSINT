@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         managePermissions = permissions(this, list, PermissionsRequestCode)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             managePermissions.checkPermissions()
+
         ip_button.setOnClickListener {
             intent = Intent(this, com.example.testapp.iplookup.iplookup::class.java)
             startActivity(intent)
