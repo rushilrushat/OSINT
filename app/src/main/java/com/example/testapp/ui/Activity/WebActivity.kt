@@ -1,4 +1,4 @@
-package com.example.testapp
+package com.example.testapp.ui.Activity
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -17,6 +17,7 @@ import android.webkit.*
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.testapp.R
 import kotlinx.android.synthetic.main.activity_web.*
 
 

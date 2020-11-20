@@ -1,14 +1,15 @@
-package com.example.testapp
+package com.example.testapp.util
 
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
+import com.example.testapp.BuildConfig
+import com.example.testapp.R
 import kotlinx.android.synthetic.main.activity_pdf_view.*
 import java.io.File
 
@@ -18,7 +19,7 @@ class pdfView : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pdf_view)
         val pdf: Uri = Uri.parse(intent.getStringExtra("FileUrl"))
-        val pdf1: Uri =  FileProvider.getUriForFile(this,BuildConfig.APPLICATION_ID+".provider",File(pdf.getPath()))
+        val pdf1: Uri =  FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID +".provider",File(pdf.getPath()))
 
         fab.setOnClickListener {
 

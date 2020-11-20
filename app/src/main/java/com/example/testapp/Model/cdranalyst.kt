@@ -1,4 +1,4 @@
-package com.example.testapp.trucaller
+package com.example.testapp.Model
 
 data class cdranalyst(
     val Address: String,

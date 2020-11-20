@@ -1,6 +1,6 @@
-package com.example.testapp.iplookup
+package com.example.testapp.ui.Activity
 
-
+import adupter
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,7 +11,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.testapp.*
+import com.example.testapp.Data
+import com.example.testapp.R
+import com.example.testapp.service.ServiceBuilder
+import com.example.testapp.util.Api
+import com.example.testapp.util.createPDF
 import kotlinx.android.synthetic.main.activity_iplookup.*
 import kotlinx.android.synthetic.main.list_item.*
 import okhttp3.ResponseBody
@@ -109,8 +113,8 @@ class iplookup : AppCompatActivity() {
                     for (i in 0 until jsonArray.length()) {
                         var d = Data()
                         var json_data = jsonArray.getJSONObject(i);
-                        d.id = json_data.getInt("id")
-                        d.type = json_data.getString("type")
+                        //d.id = json_data.getInt("id")
+                        //d.type = json_data.getString("type")
                         d.name = json_data.getString("name")
                         selectedI.add(json_data.getString("name"))
                         d.url = json_data.getString("url")
@@ -135,7 +139,7 @@ class iplookup : AppCompatActivity() {
         iplookup_recyclerview.adapter = adpt
         button2.setOnClickListener()
         {
-                        createPDF(applicationContext).createPdf("IP Loockup",key!!, value!!)
+            createPDF(applicationContext).createPdf("IP Loockup",key!!, value!!)
         }
 
         button.setOnClickListener {

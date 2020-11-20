@@ -1,4 +1,4 @@
-package com.example.testapp
+package com.example.testapp.util
 
 import android.content.Context
 import android.content.Intent
@@ -7,8 +7,6 @@ import android.net.Uri
 import android.os.Environment
 import android.util.Log
 import android.widget.Toast
-import androidx.core.content.ContextCompat
-import com.example.testapp.iplookup.iplookup
 import com.itextpdf.text.*
 import com.itextpdf.text.BaseColor
 import com.itextpdf.text.pdf.BaseFont
@@ -21,8 +19,6 @@ import java.io.FileOutputStream
 import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.*
-import androidx.core.content.ContextCompat.startActivity
-import androidx.core.content.FileProvider
 
 
 class createPDF(context: Context) {
@@ -123,7 +119,7 @@ class createPDF(context: Context) {
 
     }
     private fun previewPdf() {
-        var intent=Intent(context1,pdfView::class.java)
+        var intent=Intent(context1, pdfView::class.java)
         intent.putExtra("FileUrl", Uri.fromFile( pdfFile).toString())
         intent.setFlags(FLAG_ACTIVITY_NEW_TASK)
         context1.startActivity(intent)

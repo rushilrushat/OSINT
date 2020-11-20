@@ -11,7 +11,7 @@ data class Data(
          var url: String
 )*/
 class Data{
- var id: Int = 0
+  var id: Int = 0
   var name: String=""
   var type: String =""
   var url: String = ""

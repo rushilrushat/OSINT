@@ -1,10 +1,9 @@
-package com.example.testapp
-
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.testapp.R
 import kotlinx.android.synthetic.main.row_layout.view.*
 
 class adupter(val  key:ArrayList<String>,val value: ArrayList<String>, val context: Context) :

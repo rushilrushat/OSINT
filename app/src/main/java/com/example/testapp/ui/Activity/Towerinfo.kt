@@ -1,4 +1,4 @@
-package com.example.testapp
+package com.example.testapp.ui.Activity
 
 import android.Manifest
 import android.content.Context
@@ -10,6 +10,7 @@ import android.telephony.TelephonyManager
 import android.telephony.gsm.GsmCellLocation
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
+import com.example.testapp.R
 
 class Towerinfo : AppCompatActivity() {
     var telephonyManager: TelephonyManager? = null

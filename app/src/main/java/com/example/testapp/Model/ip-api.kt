@@ -1,4 +1,4 @@
-package com.example.testapp.iplookup.data
+package com.example.testapp.Model
 
 data class ipapi(
     val `as`: String,

@@ -1,8 +1,9 @@
-package com.example.testapp
+package com.example.testapp.ui.Activity
 
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.testapp.R
 
 class Dns : AppCompatActivity() {
 

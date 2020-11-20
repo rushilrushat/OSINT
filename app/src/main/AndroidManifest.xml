@@ -33,20 +33,22 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="LOLLIPOP">
-        <activity android:name=".Dns"></activity>
-        <activity android:name=".pdfView" />
-        <activity android:name=".Towerinfo" />
-        <activity android:name=".trucaller.trucaller" />
-        <activity android:name=".iplookup.iplookup" />
-        <activity android:name=".MainActivity" />
-        <activity
-            android:name=".splesh"
-            android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".ui.Activity.Dns"></activity>
+        <activity android:name=".util.pdfView" />
+        <activity android:name=".ui.Activity.Towerinfo" />
+        <activity android:name=".ui.Activity.trucaller" />
+        <activity android:name=".ui.Activity.iplookup" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".ui.Activity.MainActivity" />
+        <activity
+            android:name=".ui.Activity.splesh"
+            android:theme="@style/AppTheme.NoActionBar">
+
         </activity>
 
         <provider

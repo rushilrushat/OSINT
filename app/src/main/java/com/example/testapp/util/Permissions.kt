@@ -1,12 +1,11 @@
-package com.example.testapp
+package com.example.testapp.util
 
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.Context
 import android.content.pm.PackageManager
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.testapp.ui.Activity.toast
 
 
 class permissions(val activity: Activity, val list: List<String>, val code:Int) {
@@ -37,7 +36,7 @@ class permissions(val activity: Activity, val list: List<String>, val code:Int) 
     private fun deniedPermission(): String {
         for (permission in list) {
             if (ContextCompat.checkSelfPermission(activity, permission)
-                == PackageManager.PERMISSION_DENIED) return permission
+                    == PackageManager.PERMISSION_DENIED) return permission
         }
         return ""
     }
@@ -82,4 +81,3 @@ class permissions(val activity: Activity, val list: List<String>, val code:Int) 
         return false
     }
 }
-
