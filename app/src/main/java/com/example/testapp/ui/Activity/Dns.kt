@@ -12,5 +12,6 @@ class Dns : AppCompatActivity() {
         setContentView(R.layout.activity_dns)
         val pageUrl = "https://dnsdumpster.com"
         val intent = WebActivity.newIntent(this, pageUrl)
+        startActivity(intent)
     }
 }

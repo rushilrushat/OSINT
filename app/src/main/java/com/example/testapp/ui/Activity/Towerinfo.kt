@@ -11,6 +11,7 @@ import android.telephony.gsm.GsmCellLocation
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import com.example.testapp.R
+import kotlinx.android.synthetic.main.activity_towerinfo.*
 
 class Towerinfo : AppCompatActivity() {
     var telephonyManager: TelephonyManager? = null
@@ -51,12 +52,13 @@ class Towerinfo : AppCompatActivity() {
         if (gsmCellLocation2 != null) {
             i = gsmCellLocation2.cid
         }
-        cid.text = "Cell-ID $i"
+        cid.text = "Cell-ID: $i"
         val networkOperator = telephonyManager!!.networkOperator
-        mnc.text = "MNC " + networkOperator.substring(3)
-        mcc.text = "MCC " + networkOperator.substring(0, 3)
+        mnc.text = "MNC: " + networkOperator.substring(3)
+        mcc.text = "MCC: " + networkOperator.substring(0, 3)
         ty.text = telephonyManager!!.networkOperatorName + "," + getNetworkType(telephonyManager)
-        lac.text = "Location " + this.lac
+        lac.text = "Location: " + this.lac
+        main_cellid.text = "Main Cell-Id: ${networkOperator.substring(0, 3)}-${networkOperator.substring(3)}-${this.lac}-$i"
     }
     fun getNetworkType(telephonyManager2: TelephonyManager?): String {
         return when (telephonyManager2!!.networkType) {

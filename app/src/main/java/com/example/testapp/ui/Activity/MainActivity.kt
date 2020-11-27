@@ -36,17 +36,17 @@ class MainActivity : AppCompatActivity() {
 			managePermissions.checkPermissions()
 
 		ip_button.setOnClickListener {
-			intent = Intent(this, com.example.testapp.ui.Activity.iplookup::class.java)
+			intent = Intent(this, iplookup::class.java)
 			startActivity(intent)
 		}
 		true_button.setOnClickListener {
-			intent = Intent(this, com.example.testapp.ui.Activity.trucaller::class.java)
+			intent = Intent(this, trucaller::class.java)
 			startActivity(intent)
 		}
-		dns_button.setOnClickListener {
-			intent = Intent(this, com.example.testapp.ui.Activity.iplookup::class.java)
-			startActivity(intent)
-		}
+//		dns_button.setOnClickListener {
+//			intent = Intent(this, Dns::class.java)
+//			startActivity(intent)
+//		}
 		tower_info.setOnClickListener {
 			intent = Intent(this, Towerinfo::class.java)
 			startActivity(intent)

@@ -96,8 +96,8 @@ class trucaller : AppCompatActivity() {
                     for (i in 0 until jsonArray.length()) {
                         var d = Data()
                         var json_data = jsonArray.getJSONObject(i);
-                        d.id = json_data.getInt("id")
-                        d.type = json_data.getString("type")
+                        //d.id = json_data.getInt("id")
+                        //d.type = json_data.getString("type")
                         d.name = json_data.getString("name")
                         selectedI.add(json_data.getString("name"))
                         d.url = json_data.getString("url")

@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3f51b5"
     android:orientation="vertical">
 
 
@@ -97,51 +96,6 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/dns_button"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="#ffffff"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/dns" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:gravity="center"
-                            android:text="DNS Lookup"
-                            android:textColor="@color/cardview_dark_background" />
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:background="#d6d6d6"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginBottom="2dp"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:weightSum="3">
-
-
-                    <LinearLayout
                         android:id="@+id/tower_info"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -156,7 +110,7 @@
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="10dp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/abc" />
+                            android:src="@drawable/tower" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -165,13 +119,59 @@
                             android:gravity="center"
                             android:text="Tower Information"
                             android:textColor="@color/cardview_dark_background" />
+
+
                     </LinearLayout>
-
-
-
-
                 </LinearLayout>
             </LinearLayout>
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="2dp"-->
+<!--                android:layout_marginRight="2dp"-->
+<!--                android:background="#d6d6d6"-->
+<!--                android:orientation="vertical">-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="2dp"-->
+<!--                    android:layout_marginBottom="2dp"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:weightSum="3">-->
+
+
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/dns_button"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:background="#ffffff"-->
+<!--                        android:gravity="center"-->
+<!--                        android:orientation="vertical">-->
+
+
+<!--                        <ImageView-->
+<!--                            android:layout_width="30dp"-->
+<!--                            android:layout_height="30dp"-->
+<!--                            android:layout_marginTop="10dp"-->
+<!--                            android:layout_marginBottom="10dp"-->
+<!--                            android:scaleType="fitXY"-->
+<!--                            android:src="@drawable/dns" />-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_margin="5dp"-->
+<!--                            android:gravity="center"-->
+<!--                            android:text="DNS Lookup"-->
+<!--                            android:textColor="@color/cardview_dark_background" />-->
+<!--                    </LinearLayout>-->
+
+
+<!--                </LinearLayout>-->
+<!--            </LinearLayout>-->
         </LinearLayout>
 
     </ScrollView>
